@@ -1,0 +1,14 @@
+#!/bin/ruby
+require 'redgreen'
+require 'autotest/timestamp'
+ 
+module Autotest::GnomeNotify
+  def self.notify title, msg, img
+    system "notify-send '#{title}' '#{msg}' -i #{img} -t 3000"
+  end
+
+Autotest.add_hook :initialize do |autotest|
+  autotest.add_mapping(%r%^spec/(requests)/.*rb$%) do|filename, _|
+    filename
+  end
+end 
